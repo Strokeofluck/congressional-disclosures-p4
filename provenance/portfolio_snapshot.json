@@ -1,0 +1,24 @@
+{
+  "captured": "2026-11-08",
+  "commits": {
+    "portfolio": "f8bd2ae483aa02429a9fbe65bf6d597ba9a8fd33",
+    "house": "725db272d62a1e8f32c6a9de071cf4776675b2a4",
+    "senate": "62f075a1e7dcbbb95865a62319de6aac2a6ce8f9"
+  },
+  "sources": {
+    "House": {
+      "file": "data/portfolio/house_ptr_transactions_web.csv",
+      "sha256": "8fc76a72632fdd7fb3eb718106afa92de08ab5e624be954a6edc3b718998eed8",
+      "rows": 26732,
+      "transaction_date_min": "2015-05-08",
+      "transaction_date_max": "3031-04-30"
+    },
+    "Senate": {
+      "file": "data/portfolio/senate_ptr_transactions_electronic.csv",
+      "sha256": "7a1ad300baf4f6ae6eeb285e43bdea8dbb72cc1a64f84d3c31b367d775a7b187",
+      "rows": 4930,
+      "transaction_date_min": "2020-02-26",
+      "transaction_date_max": "2026-07-31"
+    }
+  }
+}

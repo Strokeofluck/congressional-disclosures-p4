@@ -1,0 +1,5 @@
+chamber,filing_id,politician,transaction_date,owner,ticker,asset,type,amount,review,source_url,date_quality
+House,20018672,Hon. Pete Sessions,3031-04-30,SP,IBM,International Business Machines Corporation,P,"$1,001 - $15,000",high,https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2021/20018672.pdf,Date needs source review
+House,20020914,Hon. Virginia Foxx,2220-04-07,JT,MMP,Magellan Midstream Partners L.P. Limited Partnership,P,"$1,001 - $15,000",high,https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2022/20020914.pdf,Date needs source review
+House,20021790,Hon. Virginia Foxx,2202-09-19,JT,NEWT,Newtek Business Services Corp.,P,"$1,001 - $15,000",high,https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2022/20021790.pdf,Date needs source review
+House,20033889,Hon. Steve Cohen,2026-12-26,,SONY,Sony Group Corporation American Depositary Shares,P,"$1,001 - $15,000",high,https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20033889.pdf,Date needs source review
