@@ -164,7 +164,6 @@ P4 continues my P2/P3 House–Senate disclosure project. It combines an independ
 ## Open the project
 
 - `docs/index.html`: P3-style source/code inspector, plus the final table and P4 report
-- `docs/network.html`: monthly filer–ticker network animation, built with `python scripts/build_network.py`
 - `docs/completion.html`: finished searchable disclosure table
 - `reports/P4_REPORT.md`: required nine-section written report
 - `notebooks/DSA405_002_FA26_P4_sryan3.ipynb`: executed course notebook
@@ -205,8 +204,6 @@ Moodle requires the repository URL, notebook, report, and self-scored rubric. Du
     provenance.write_text(txt,encoding='utf-8')
 
 def update_site():
-    from build_network import build_network
-    build_network()
     shutil.copy2(ROOT/'templates/p4-home.html',ROOT/'docs/index.html')
 
 
