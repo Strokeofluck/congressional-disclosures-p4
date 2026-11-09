@@ -1,3 +1,4 @@
+if(new URLSearchParams(location.search).has('embed'))document.body.classList.add('embedded');
 'use strict';
 const columns=[['chamber','Chamber'],['politician','Filer'],['filing_id','Filing ID'],['transaction_date','Transaction date'],['ticker','Ticker'],['asset','Asset'],['owner','Owner'],['type','Transaction type'],['amount','Amount range'],['review','Source review label'],['date_quality','Date check'],['source_url','Source']];
 const $=id=>document.getElementById(id);let chamber='House',page=0,size=10,sort='transaction_date',direction=-1,queries={};

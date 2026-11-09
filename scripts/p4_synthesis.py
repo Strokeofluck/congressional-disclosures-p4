@@ -204,14 +204,8 @@ Moodle requires the repository URL, notebook, report, and self-scored rubric. Du
     provenance.write_text(txt,encoding='utf-8')
 
 def update_site():
-    p=ROOT/'docs/index.html';s=p.read_text(encoding='utf-8')
-    s=s.replace('DSA 405 <span>/</span> PROJECT 03','DSA 405 <span>/</span> PROJECT 04')
-    s=s.replace('https://github.com/Strokeofluck/Data-Wrangling-and-Web-Scraping-P3','https://github.com/Strokeofluck/congressional-disclosures-p4')
-    s=s.replace('<title>In the record · House + Senate | P3</title>','<title>In the record · House + Senate | P4</title>')
-    if 'id="p4-completion"' not in s:
-        links='<div id="p4-completion" style="margin:24px 0;padding:22px;border:1px solid #888;border-radius:8px"><h2>P4: the finished disclosure table</h2><p>The source inspector below shows the extraction. The completion view brings in the searchable House and Senate table snapshots from the data portfolio.</p><p><a href="completion.html">Open the finished searchable table ↗</a> · <a href="P4-report.html">Read the P4 report ↗</a> · <a href="P4-notebook.html">Read the executed P4 notebook ↗</a></p><p>Handwritten and image-only extraction remains incomplete. The final portfolio snapshots and the validated 2025 comparison have different scopes.</p></div>'
-        s=s.replace('<nav class="views"',links+'<nav class="views"',1)
-    p.write_text(s,encoding='utf-8')
+    shutil.copy2(ROOT/'templates/p4-home.html',ROOT/'docs/index.html')
+
 
 def main():
     summary=build();manifest=build_completion();docs(summary,manifest);update_site()
