@@ -7,6 +7,7 @@ P4 continues my P2/P3 House–Senate disclosure project. It combines an independ
 ## Open the project
 
 - `docs/index.html`: P3-style source/code inspector, plus the final table and P4 report
+- `docs/network.html`: monthly filer–ticker animation; rebuild with `python scripts/build_network.py`
 - `docs/completion.html`: finished searchable disclosure table
 - `reports/P4_REPORT.md`: required nine-section written report
 - `notebooks/DSA405_002_FA26_P4_sryan3.ipynb`: executed course notebook

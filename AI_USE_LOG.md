@@ -7,3 +7,7 @@ ChatGPT helped develop code, explain methods, draft documentation, and identify 
 The checked implementation uses PyMuPDF's page.find_tables(), fitz.Rect, and page.get_text(..., clip=rect). It is fair to describe the rectangle finder as a library-based PDF geometry approach. That does not prove why the model repeated suggestions internally, and a library is not automatically correct. I still needed source checks, documented exceptions, and failure handling. It also did not make handwritten records readable.
 
 The error in the AI-assisted process was persisting with unsuccessful strategies rather than changing methods when the evidence required it. My correction was to set a stop-and-reassess point, inspect a representative original, test a concrete alternative, and keep only changes supported by the source. The preserved date and duplicate-review examples show why plausible output alone is insufficient. This account is my retrospective reflection, not a controlled benchmark of competing models or libraries.
+
+## November 9 network animation update
+
+At Sean’s request, Codex used the supplied dynamic.R as a reference for ordered network snapshots and animated transitions. The added JavaScript viewer uses the validated 2025 filer–ticker activity data, fixed node positions, monthly playback, and explicit new/continuing/departing ties. The Python builder regenerates the data without adding dependencies. Departing activity is not interpreted as ended ownership.
