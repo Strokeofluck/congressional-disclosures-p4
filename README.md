@@ -2,7 +2,7 @@
 
 Sean Ryan · sryan3 · DSA 405 (002) · Fall 2026
 
-P4 continues my P2/P3 House–Senate disclosure project. It combines an independently reproducible extraction and integration pipeline with the final searchable table from my data portfolio. The validated 2025 analysis finds 160 shared ticker-month keys among 3,760 total. The broader portfolio completion snapshots remain separately labeled.
+P4 continues my P2/P3 House–Senate disclosure project. It combines an independently reproducible extraction and integration pipeline with the final searchable table from my data portfolio. The validated 2025 pipeline preserves 6,394 House and 518 Senate in-scope report rows. Source-linked search and inspection are the main outputs. The broader portfolio completion snapshots remain separately labeled.
 
 ## Open the project
 
@@ -19,6 +19,7 @@ Use Python 3.12. Install `requirements.txt` in a virtual environment.
 
 ```sh
 python -m pip install -r requirements.txt
+python scripts/unicode_example.py
 python scripts/p4_synthesis.py
 python -m unittest discover -s tests -v
 python scripts/build_p4_notebook.py
@@ -39,3 +40,7 @@ See `provenance/source_commits.json` for inherited P2/P3 origins and `provenance
 We did not solve handwritten or image-only disclosures. Senate paper reports are deferred. Missing parsed rows are not proof of no transactions. Unequal collection coverage prevents trading-volume comparisons. Report items include amendments, amounts remain ranges, and the broader portfolio snapshots are not substituted into the 2025 join.
 
 Moodle requires the repository URL, notebook, report, and self-scored rubric. Due November 20, 2026, 11:59 PM Eastern. This repository build does not submit to Moodle. Review the reflection and suggested self-scores before submission.
+
+## Verification of this independent build
+
+On November 12 the raw-input hash checks, 12 unit tests and all 12 notebook code cells passed. The code cells were executed in order in a fresh Python 3.13 process using `python scripts/run_notebook_plain.py`. A separate fresh Jupyter-kernel run was not repeated here because its optional packages could not be installed. `python scripts/execute_p4_notebook.py` remains the full Jupyter check to run in the documented environment. See `provenance/p4_verification.json`. Review the first-person reflection and suggested rubric scores before submission.

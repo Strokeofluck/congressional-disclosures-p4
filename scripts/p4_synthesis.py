@@ -46,7 +46,7 @@ Sean Ryan · sryan3 · DSA 405 (002) · Fall 2026
 
 I wanted to make House and Senate transaction disclosures searchable and traceable to their original records. P2 supplied the cleaning and audit foundation. P3 built independent acquisition, parsing, and a verified House–Senate integration. P4 brings those parts together with the finished disclosure-search table used by my data portfolio.
 
-Working with the actual data narrowed the analytical question: which reported ticker–calendar-month combinations appear in the two captured sources during 2025? The result is a comparison of archive coverage, not a claim about all congressional trading, suspicious behavior, or investment returns.
+Working with the actual data narrowed the question to: how can differently structured public disclosures become searchable, consistently labeled records that readers can trace back to a filing? The practical result is a source-linked table and inspector. A ticker-month comparison is retained as a P3 integration exercise, not the central research finding or an input to the House-only network.
 
 ## 2. Sources, provenance and terms
 
@@ -66,6 +66,8 @@ The final completion table and the 2025 analysis have different scopes. Their co
 
 House PDFs are parsed with the inherited PyMuPDF geometry-based implementation. It finds tables, identifies cell rectangles, and reads embedded text inside the appropriate regions. This helps distinguish an asset description from a date or amount in the adjacent column. Ticker and amount rules run after extraction. The source wording remains available, and recorded review decisions are replayed only when their original evidence still matches.
 
+A real character-mapping error appears in Greene PTR 20030924. The PDF displays `Filing Status: New`, but PyMuPDF extracts the label with incorrect Unicode characters. `normalize_house_pdf_text` repairs only characters in U+0283 through U+029C by subtracting hexadecimal `0x0222` (546) from each code point. For example, U+0283 (`sha`, code 643) becomes `a` (code 97). ABBV itself extracts correctly. Recovering the label lets the parser store `New` separately as `filing_status`, rather than leave that metadata inside an asset description. This is related to Week 4's mojibake lesson, although the PDF font mapping differs from the lab's UTF-8/Latin-1 mismatch. See `scripts/unicode_example.py` and `data/processed/unicode_example.json` for the actual before-and-after text.
+
 One documented review kept January 13, 2025 as a transaction date because January 17 belonged to the option description. Another retained two similar-looking transactions because the source listed different unit quantities. Similar asset/date/amount brackets therefore do not justify automatic deletion. The review log changes two amount cells without deleting report rows.
 
 Senate HTML is read with Beautiful Soup after checking the expected table headers. Dates, owners, asset names, tickers, types, amounts, and source links map into the shared schema. The comparable analysis keeps 2025 transaction dates, the stated stock/ticker scope, and usable ticker labels. Excluded items remain in excluded_rows.csv. Amount brackets remain brackets, and missing amounts remain missing.
@@ -80,9 +82,11 @@ The notebook checks expected union size, key uniqueness, preservation of unmatch
 
 ## 6. Findings
 
-The captured 2025 comparison contains **6,394 House report rows and 518 Senate report rows**. Their summaries produce **3,760 ticker-month keys**: **160 in both sources**, **3,410 House-only**, and **190 Senate-only**. Only **4.3%** of the union appears in both archives. An inner join would discard 3,600 keys, hiding much of the available coverage.
+The main outcome is a searchable, source-linked record collection, with separate fields for the asset, ticker, dates, amounts, and filing metadata. The captured 2025 pipeline retains **6,394 House report rows and 518 Senate report rows**.
 
-This is useful evidence about the captured records and the importance of the join design. It is not evidence that House members actually trade more than Senators, or that unmatched tickers were not traded in the other chamber. Different collection windows, excluded formats, and unresolved records limit that interpretation.
+**Supporting integration exercise, carried forward from P3.** Their summaries produce **3,760 ticker-month keys**: **160 in both sources**, **3,410 House-only**, and **190 Senate-only**. Only **4.3%** of the union appears in both archives. An inner join would discard 3,600 keys, hiding much of the available coverage.
+
+This overlap is a description of the two captured archives, not a duplication problem, a repair, or an input to the House-only network. It is retained to document and reproduce the required P3 join. It is not evidence that House members actually trade more than Senators, or that unmatched tickers were not traded in the other chamber. Different collection windows, excluded formats, and unresolved records limit that interpretation.
 
 The completion table contains **26,732 House rows and 4,930 Senate rows**, or **31,662 source-snapshot rows**. Its contribution is practical: a reader can search, filter, sort, and open the underlying disclosure. These broader portfolio rows do not replace or expand the validated 2025 analysis. The final web view labels that distinction.
 
@@ -110,6 +114,8 @@ The checked implementation uses PyMuPDF's page.find_tables(), fitz.Rect, and pag
 
 The error in the AI-assisted process was persisting with unsuccessful strategies rather than changing methods when the evidence required it. My correction was to set a stop-and-reassess point, inspect a representative original, test a concrete alternative, and keep only changes supported by the source. The preserved date and duplicate-review examples show why plausible output alone is insufficient. This account is my retrospective reflection, not a controlled benchmark of competing models or libraries.
 
+A concrete AI mistake during presentation preparation was treating 160 shared ticker-month keys as a main finding without explaining its relevance. I questioned what it meant and whether it fed the network. Checking the pipeline showed it only described the P3 summary join; the House-only network was separate. I removed that statistic from the presentation and kept it here only as supporting integration documentation. I also asked to verify a proposed ABBV character-repair example: inspecting the PDF text showed ABBV was already correct, so the example uses the genuinely broken filing-status label instead.
+
 ## 9. Reproducibility
 
 Repository: https://github.com/Strokeofluck/congressional-disclosures-p4
@@ -126,7 +132,7 @@ The imported portfolio snapshots retain **{len(anomalies)} rows with dates requi
 ## 7. What is missing and why it matters''')
     (ROOT/'reports/P4_REPORT.md').write_text(report,encoding='utf-8')
     # Markdown render is generated from the same required report.
-    from nbconvert.filters.markdown_mistune import markdown2html_mistune
+    from render_markdown import render as markdown2html_mistune
     body=markdown2html_mistune(report)
     (ROOT/'docs/P4-report.html').write_text('<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>P4 final report</title><style>body{font:18px/1.65 system-ui;max-width:1000px;margin:40px auto;padding:0 24px;color:#222}a{color:#2780e3}table{border-collapse:collapse}td,th{padding:12px;border-bottom:1px solid #ddd;text-align:left}h2{margin-top:2em}</style><a href="index.html">Return to source inspector</a>'+body+'</html>',encoding='utf-8')
     frames={'analytical transaction':pd.read_csv(ROOT/'data/processed/combined_transactions.csv',dtype=str,keep_default_na=False),'ticker-month join':pd.read_csv(ROOT/'data/processed/combined_ticker_month.csv',dtype=str,keep_default_na=False),'portfolio completion':pd.read_csv(ROOT/'docs/data/portfolio-completion.csv',dtype=str,keep_default_na=False)}
@@ -159,7 +165,7 @@ Suggested total: 48/52. Technical ambition is tier-gated and this score is not a
 
 Sean Ryan · sryan3 · DSA 405 (002) · Fall 2026
 
-P4 continues my P2/P3 House–Senate disclosure project. It combines an independently reproducible extraction and integration pipeline with the final searchable table from my data portfolio. The validated 2025 analysis finds 160 shared ticker-month keys among 3,760 total. The broader portfolio completion snapshots remain separately labeled.
+P4 continues my P2/P3 House–Senate disclosure project. It combines an independently reproducible extraction and integration pipeline with the final searchable table from my data portfolio. The validated 2025 pipeline preserves 6,394 House and 518 Senate in-scope report rows. Source-linked search and inspection are the main outputs. The broader portfolio completion snapshots remain separately labeled.
 
 ## Open the project
 
@@ -176,6 +182,7 @@ Use Python 3.12. Install `requirements.txt` in a virtual environment.
 
 ```sh
 python -m pip install -r requirements.txt
+python scripts/unicode_example.py
 python scripts/p4_synthesis.py
 python -m unittest discover -s tests -v
 python scripts/build_p4_notebook.py

@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-12",
+  "python": "3.13",
+  "raw_file_hashes_verified": 1105,
+  "unit_tests_passed": 12,
+  "notebook_code_cells_sequentially_executed": 12,
+  "execution_mode": "Fresh Python process, in-order unmodified code cells with plain-display fallback",
+  "jupyter_fresh_kernel": "Not rerun in this environment: nbclient/nbformat unavailable and package downloads blocked",
+  "browser_visual_check": "Not performed in this environment",
+  "author_review_remaining": [
+    "First-person AI reflection",
+    "Suggested self-scored rubric"
+  ],
+  "counts": {
+    "house_2025": 6394,
+    "senate_2025": 518,
+    "portfolio_snapshot": 31662,
+    "portfolio_date_review_flags": 4
+  }
+}

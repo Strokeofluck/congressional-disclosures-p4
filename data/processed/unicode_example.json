@@ -1,0 +1,14 @@
+{
+  "filing_id": "20030924",
+  "page": 1,
+  "source": "data/raw/2025_pdfs/20030924.pdf",
+  "original_url": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2025/20030924.pdf",
+  "raw": "F\u028b\u028e\u028b\u0290\u0289 S\u0296\u0283\u0296\u0297\u0295: New",
+  "cleaned": "Filing Status: New",
+  "offset_decimal": 546,
+  "offset_hex": "0x0222",
+  "affected_range": "U+0283-U+029C",
+  "ticker_already_correct": "ABBV",
+  "destination_field": "filing_status",
+  "destination_value": "New"
+}
