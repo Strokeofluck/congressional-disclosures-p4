@@ -130,6 +130,8 @@ The website supports the report and executed notebook. Moodle still requires the
 The imported portfolio snapshots retain **{len(anomalies)} rows with dates requiring source review**: malformed dates, dates after the November 8 capture date, or years before the expected public-reporting period. Examples include 3031 and 2220. The completion table marks these records, preserves their original date text and source links, and places them after plausible dates in the default display. No guessed corrections or deletions are made. The review queue is `data/processed/portfolio_date_review.csv`. These display-snapshot issues do not enter the separately filtered 2025 analytical join.
 
 ## 7. What is missing and why it matters''')
+    concise_template=ROOT/'templates/P4_REPORT.md'
+    if concise_template.exists(): report=concise_template.read_text(encoding='utf-8')
     (ROOT/'reports/P4_REPORT.md').write_text(report,encoding='utf-8')
     # Markdown render is generated from the same required report.
     from render_markdown import render as markdown2html_mistune
