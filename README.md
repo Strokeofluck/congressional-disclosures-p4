@@ -6,6 +6,11 @@ P4 continues my P2/P3 House–Senate disclosure project. It combines an independ
 
 ## Open the project
 
+**[Read the written report as a web page](https://strokeofluck.github.io/congressional-disclosures-p4/P4-report.html)**
+
+[Open the interactive P4 project](https://strokeofluck.github.io/congressional-disclosures-p4/)
+
+
 - `docs/index.html`: P3-style source/code inspector, plus the final table and P4 report
 - `docs/completion.html`: finished searchable disclosure table
 - `reports/P4_REPORT.md`: required nine-section written report
