@@ -147,7 +147,8 @@ The imported portfolio snapshots retain **{len(anomalies)} rows with dates requi
             dictionary.append(f'| `{c}` | {meaning} | {int(df[c].eq("").sum())} |')
     (ROOT/'DATA_DICTIONARY.md').write_text('\n'.join(dictionary),encoding='utf-8')
     (ROOT/'AI_USE_LOG.md').write_text('# AI use and reflection\n\n'+report.split('## 8. AI use log and reflection\n\n')[1].split('\n## 9.')[0],encoding='utf-8')
-    (ROOT/'SELF_ASSESSMENT.md').write_text('''# P4 suggested self-scored rubric
+    if not (ROOT/'SELF_ASSESSMENT.md').exists():
+        (ROOT/'SELF_ASSESSMENT.md').write_text('''# P4 suggested self-scored rubric
 
 Sean Ryan should confirm these scores after reviewing the final report and notebook. These are suggestions, not an instructor grade. Scale 0–4 is carried forward from the course rubric convention.
 
@@ -158,7 +159,7 @@ Sean Ryan should confirm these scores after reviewing the final report and noteb
 | Who is missing | 2 | 4 | Report §7 gives specific exclusions and consequences |
 | AI use log and reflection | 2 | 3 | User's retrospective account, checked geometry implementation, practical change in workflow; no fabricated experiment log |
 | Technical ambition | 2 | 3 | Independent PDF extraction, strict HTML parser, geometry source inspector, verified integration; tier-gated final score remains instructor-dependent |
-| Repository and reproducibility | 2 | 4 | Bundled inputs, pinned packages, rebuild command, fresh-kernel notebook and tests |
+| Repository and reproducibility | 2 | 4 | Bundled inputs, pinned packages, rebuild command, executed notebook and tests; see README for fresh-kernel verification status |
 | Documentation carried forward | 1 | 4 | Updated dictionary, provenance, review records and missingness |
 
 Suggested total: 48/52. Technical ambition is tier-gated and this score is not a promise of a grade. Final author review is required. Do not submit this suggestion as a confirmed self-score without reviewing it.
@@ -206,7 +207,8 @@ We did not solve handwritten or image-only disclosures. Senate paper reports are
 
 Moodle requires the repository URL, notebook, report, and self-scored rubric. Due November 20, 2026, 11:59 PM Eastern. This repository build does not submit to Moodle. Review the reflection and suggested self-scores before submission.
 '''
-    (ROOT/'README.md').write_text(readme,encoding='utf-8')
+    if not (ROOT/'README.md').exists():
+        (ROOT/'README.md').write_text(readme,encoding='utf-8')
     provenance=ROOT/'PROVENANCE.md';txt=provenance.read_text(encoding='utf-8')
     marker='\n## P4 completion snapshots\n'
     txt=txt.split(marker)[0]+marker+'\nP4 continues the submitted P3 implementation preserved locally as the October 31, 2026 project copy. The unchanged P3 raw manifest, source commits, parser hashes and review records remain authoritative for its 2025 integration. The final portfolio CSV snapshots are distinct derived artifacts. Their hashes and source commits are recorded in `provenance/portfolio_snapshot.json`. They are not inputs to the validated 2025 join. P4 does not claim to reproduce the full multi-year portfolio scrape from its original raw records; the final table is a documented frozen export.\n'
