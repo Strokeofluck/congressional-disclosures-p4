@@ -146,7 +146,10 @@ The imported portfolio snapshots retain **{len(anomalies)} rows with dates requi
             meaning=meanings.get(c,'Per-chamber aggregate: '+c.replace('_',' ')+'. Missing means no observation in that chamber, not observed zero.')
             dictionary.append(f'| `{c}` | {meaning} | {int(df[c].eq("").sum())} |')
     (ROOT/'DATA_DICTIONARY.md').write_text('\n'.join(dictionary),encoding='utf-8')
-    (ROOT/'AI_USE_LOG.md').write_text('# AI use and reflection\n\n'+report.split('## 8. AI use log and reflection\n\n')[1].split('\n## 9.')[0],encoding='utf-8')
+    reflection=re.search(r'^## 8\. AI use log and reflection\s*\n(.*?)(?=^## 9\.|\Z)',report,re.M|re.S)
+    if reflection is None:
+        raise ValueError('Report must include section 8: AI use log and reflection')
+    (ROOT/'AI_USE_LOG.md').write_text('# AI use and reflection\n\n'+reflection.group(1).strip()+'\n',encoding='utf-8')
     if not (ROOT/'SELF_ASSESSMENT.md').exists():
         (ROOT/'SELF_ASSESSMENT.md').write_text('''# P4 suggested self-scored rubric
 
