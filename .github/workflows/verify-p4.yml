@@ -1,0 +1,37 @@
+name: Verify P4 submission
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install documented dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Verify source example and pipeline
+        run: |
+          python scripts/unicode_example.py
+          python scripts/p4_synthesis.py
+          python -m unittest discover -s tests -v
+      - name: Restart and execute notebook in a fresh Jupyter kernel
+        run: python scripts/execute_p4_notebook.py
+      - name: Save verified submission files
+        uses: actions/upload-artifact@v4
+        with:
+          name: DSA405-P4-verified-submission
+          path: |
+            notebooks/DSA405_002_FA26_P4_sryan3.ipynb
+            reports/P4_REPORT.md
+            SELF_ASSESSMENT.md
+            docs/P4-notebook.html
+            docs/P4-report.html
+          if-no-files-found: error
