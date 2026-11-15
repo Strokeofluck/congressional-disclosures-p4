@@ -34,6 +34,12 @@ python -m http.server 8765
 
 Open `http://localhost:8765/docs/`. The final table and inspector also support local-file viewing. A forced raw House rebuild is `python scripts/house.py --rebuild`; the normal build verifies its immutable recipe and output before using a cache. All raw inputs and portfolio CSV snapshots are bundled. No sibling repo, credentials, live Senate agreement, or current scrape is needed.
 
+## Original sources and terms
+
+- [U.S. House Clerk financial disclosures](https://disclosures-clerk.house.gov/): official PTR PDFs; preserved source URLs and checksums are in `PROVENANCE.md`.
+- [U.S. Senate eFD](https://efdsearch.senate.gov/search/): archived electronic disclosure pages; Senate use restrictions apply. Public access does not imply a permissive reuse license.
+- Inherited parser code retains its upstream notices. Derived portfolio CSVs are frozen snapshots with source commits and hashes in `provenance/portfolio_snapshot.json`.
+
 ## Layout and provenance
 
 `data/raw/` preserves P3's official source archive. `data/review/` contains reviewed decisions. `vendor/` holds the pinned House parser. `scripts/` contains extraction, integration, tests/build helpers. `data/processed/` holds analytical outputs. `data/portfolio/` contains the two derived snapshots feeding the completion table. `docs/` contains the portable website, figures, and readable notebook. `reports/` contains the final written report.
@@ -48,4 +54,6 @@ Moodle requires the repository URL, notebook, report, and self-scored rubric. Du
 
 ## Verification of this independent build
 
-On November 12 the raw-input hash checks, 12 unit tests and all 12 notebook code cells passed. The code cells were executed in order in a fresh Python 3.13 process using `python scripts/run_notebook_plain.py`. A separate fresh Jupyter-kernel run was not repeated here because its optional packages could not be installed. `python scripts/execute_p4_notebook.py` remains the full Jupyter check to run in the documented environment. See `provenance/p4_verification.json`. Review the first-person reflection and suggested rubric scores before submission.
+On November 15, the documented Python 3.12 environment passed the source example, full pipeline build, 12 unit tests, and all 12 notebook code cells in a fresh Jupyter kernel. The pipeline verified all 1,105 raw-file checksums and retained the same 6,394 House and 518 Senate analytical rows, plus the separate 31,662-row portfolio snapshot. Four date flags remain preserved for review.
+
+[Successful verification run and executed submission files](https://github.com/Strokeofluck/congressional-disclosures-p4/actions/runs/43746242597). The workflow runs automatically on future changes. Review the first-person reflection and suggested rubric scores before submission. The GitHub repository is private; ensure the instructor has access before submitting its URL.
